@@ -11,16 +11,13 @@ function ThemeToggle() {
   return (
     <button
       type="button"
-      className="toggle-button"
+      className="toggle-button toggle-button--icon"
       onClick={toggleTheme}
       aria-label={t('theme.toggle')}
       title={isDark ? t('theme.light') : t('theme.dark')}
     >
       <span className="toggle-button__icon" aria-hidden="true">
         {isDark ? '☀️' : '🌙'}
-      </span>
-      <span className="toggle-button__text">
-        {isDark ? t('theme.light') : t('theme.dark')}
       </span>
     </button>
   );

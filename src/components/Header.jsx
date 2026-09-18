@@ -7,7 +7,7 @@ import UserMenu from './UserMenu';
 import { LocaleContext } from '../contexts/LocaleContext';
 
 const navLinkClass = ({ isActive }) => (
-  isActive ? 'nav-pill nav-pill--active' : 'nav-pill'
+  isActive ? 'nav-pill nav-pill--outline nav-pill--active' : 'nav-pill nav-pill--outline'
 );
 
 function Header() {

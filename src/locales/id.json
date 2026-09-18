@@ -57,7 +57,7 @@
     "nameLabel": "Nama Lengkap",
     "namePlaceholder": "John Doe",
     "emailLabel": "Alamat Email",
-    "emailPlaceholder": "nama@example.com",
+    "emailPlaceholder": "nama@email.com",
     "passwordLabel": "Kata Sandi",
     "passwordPlaceholder": "Minimal 6 karakter",
     "confirmPasswordLabel": "Konfirmasi Kata Sandi",
