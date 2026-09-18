@@ -1,188 +1,171 @@
-# Personal Notes App
+# NOTUFY — Personal Notes Single Page Application (SPA)
 
-A lightweight personal notes single-page application (SPA) built with React and Vite. The visual design is inspired by Anytype, featuring a clean white canvas, jet-black typography, hairline borders, subtle mint-teal accents, and soft pastel hero gradients.
-
-This project was developed as a hands-on learning project to practice core React.js fundamentals and client-side routing. It is not intended as a production or full-stack application.
+**Notufy** is a modern, responsive personal notes Single Page Application built with **React**, **Vite**, and **React Router**, powered by the **Dicoding Notes RESTful API**. Designed with an editorial, minimalist Anytype-inspired aesthetic, Notufy features clean hairline borders, curated typography, dark mode capability, internationalization (English & Indonesian), global context state management, custom hooks, and authenticated note-taking.
 
 ---
 
-## About the Project
+## 🌟 Key Features
 
-Personal Notes App is a frontend-only web application designed for organizing personal thoughts, snippets, and ideas. The main goal of this project is to explore React concepts—such as state management, component composition, and client-side routing—without relying on an external backend or database.
-
-All notes and state changes are persisted locally on the client side using the browser's `localStorage` API.
-
----
-
-## Features
-
-- **Active & Archived Notes**: View active notes on the home page and archived notes on a dedicated archive page.
-- **URL-Synchronized Search**: Filter notes by title in real-time with search queries preserved in URL query parameters (`/?keyword=...`).
-- **Dynamic Note Detail**: Read full notes via path parameters (`/notes/:id`).
-- **Create Notes**: Add new notes with a controlled title input and a `contentEditable` body field.
-- **Archive & Unarchive**: Toggle note archive status with automatic redirection (archiving redirects to Archives, unarchiving redirects to Home).
-- **Delete Notes**: Permanently remove unwanted notes from the detail view.
-- **HTML Content Parsing**: Safe rendering of formatted note content using `html-react-parser`.
-- **404 Not Found Page**: Friendly fallback interface for undefined routes.
-
----
-
-## Technologies Used
-
-- **[React.js](https://react.dev/)** (v18) — UI library for building component-based interfaces
-- **[Vite](https://vitejs.dev/)** — Next-generation frontend build tool and development server
-- **[React Router](https://reactrouter.com/)** (`react-router-dom` v6) — Declarative client-side routing
-- **JavaScript (ES6+)** — Modern JavaScript syntax and features
-- **CSS3** — Custom styling with responsive layouts and modern design tokens
-- **Web Storage API (`localStorage`)** — Client-side data persistence
-- **Additional Dependencies**:
-  - `prop-types` — Runtime type checking for React component props
-  - `html-react-parser` — Converts HTML strings into React elements
-
----
-
-## Learning Concepts
-
-This project showcases practical implementation of key React principles:
-
-- **Functional Components**: Modular and reusable component architecture.
-- **Props & PropTypes**: Component communication and prop validation.
-- **State Management**: Managing local and controlled form states with `useState`.
-- **Event Handling**: Handling user input, form submissions, and button actions.
-- **React Hooks**:
-  - `useState` for state tracking
-  - `useEffect` for DOM synchronization
-  - `useRef` for direct DOM references
-  - `useMemo` for memoizing filtered calculations
-- **Client-Side Routing**: Route configuration, nested paths, dynamic route parameters (`useParams`), query string manipulation (`useSearchParams`), and programmatic navigation (`useNavigate`).
-- **Conditional Rendering**: Handling empty note lists, dynamic button labels, and fallback states.
-- **List Rendering**: Efficient list mapping with unique item keys.
+- **Authentication & Security**:
+  - Full registration with real-time validation (email syntax, password minimum 6 chars, confirm password verification).
+  - Secure login storing access token in `localStorage`.
+  - Global `AuthContext` with automatic token verification (`getUserLogged`) on session startup.
+  - Safe logout clearing credentials and resetting client state.
+- **Route Protection**:
+  - **Protected Routes**: Home (`/`), Archives (`/archives`), New Note (`/notes/new`), and Detail (`/notes/:id`) require authentication and redirect guests to `/login`.
+  - **Public Routes**: `/login` and `/register` automatically redirect authenticated users to `/`.
+  - Fallback 404 page for unknown routes or missing note resources.
+- **Complete Note Management (REST API Source of Truth)**:
+  - **Active Notes**: Browse all active notes with instant search filtering.
+  - **Archived Notes**: Separate dedicated archive management space.
+  - **Create Note**: Title input and rich `contentEditable` body with HTML parsing (`html-react-parser`).
+  - **Note Detail**: View complete note information, status, and formatted creation date.
+  - **Archive & Unarchive**: One-click toggling between active and archived states.
+  - **Delete Note**: Permanently delete notes with mutation protection.
+- **Search & URL Synchronization**:
+  - Real-time case-insensitive keyword filtering.
+  - Synchronized query parameter (`/?keyword=...` and `/archives?keyword=...`).
+- **Global Context Architecture**:
+  - `AuthContext`: Centralized user profile and authentication status.
+  - `ThemeContext`: Seamless toggle between Light and Dark mode with persistent `localStorage`.
+  - `LocaleContext`: Instant switching between English (default) and Bahasa Indonesia with persistent `localStorage`.
+- **Reusable Custom Hooks**:
+  - `useInput`: Streamlined form input state handling.
+  - `useAuth`: Direct access to authentication state and actions.
+  - `useNotes`: Encapsulated API operations, loading states, and error handling.
+- **User Experience & Feedback**:
+  - Visual loading spinners and skeletons on all network requests.
+  - Duplicate action prevention by disabling buttons during mutations.
+  - Contextual error alerts and empty states for both active and search scenarios.
 
 ---
 
-## Getting Started
+## 🛠️ Technology Stack
+
+- **Frontend**: [React.js](https://react.dev/) (v18, Function Components + Hooks)
+- **DOM Rendering**: `react-dom`
+- **Build Tool**: [Vite](https://vitejs.dev/)
+- **Routing**: [React Router](https://reactrouter.com/) (`react-router-dom` v6)
+- **State Management**: React Context (`AuthContext`, `ThemeContext`, `LocaleContext`)
+- **Styling**: Vanilla CSS3 with CSS custom properties (design tokens), responsive CSS Grid, and Flexbox
+- **Typography**: Google Fonts (*Inter* & *Playfair Display*)
+- **Data Source**: Dicoding Notes RESTful API (`https://notes-api.dicoding.dev/v1`)
+- **Prop Validation**: `prop-types`
+- **HTML Parsing**: `html-react-parser`
+
+---
+
+## 📁 Project Structure
+
+```text
+personal-notes-app/
+├── public/
+├── src/
+│   ├── components/
+│   │   ├── Header.jsx           # Main navigation, brand, controls & user info
+│   │   ├── LoadingIndicator.jsx # Unified loading spinner & screen
+│   │   ├── LocaleToggle.jsx     # English / Bahasa Indonesia language switch
+│   │   ├── NoteInput.jsx        # Note form with contentEditable body
+│   │   ├── NoteItem.jsx         # Note grid card preview with localized date
+│   │   ├── NoteList.jsx         # Responsive note grid & empty state
+│   │   ├── ProtectedRoute.jsx   # Route guard for authenticated users
+│   │   ├── PublicRoute.jsx      # Route guard redirecting authenticated users
+│   │   ├── SearchBar.jsx        # Real-time search input with URL sync
+│   │   ├── ThemeToggle.jsx      # Light / Dark theme toggle
+│   │   └── UserMenu.jsx         # Logged-in user badge and logout button
+│   ├── contexts/
+│   │   ├── AuthContext.jsx      # Authentication session & user state
+│   │   ├── LocaleContext.jsx    # Persistent language state & translation dictionary
+│   │   └── ThemeContext.jsx     # Persistent theme state & data-theme controller
+│   ├── hooks/
+│   │   ├── useAuth.js           # Custom hook for AuthContext
+│   │   ├── useInput.js          # Custom hook for form input management
+│   │   └── useNotes.js          # Custom hook for note data fetching & mutations
+│   ├── locales/
+│   │   ├── en.json              # English localization dictionary (Default)
+│   │   └── id.json              # Indonesian localization dictionary
+│   ├── pages/
+│   │   ├── AddNotePage.jsx      # Create new note page
+│   │   ├── ArchivePage.jsx      # Archived notes view
+│   │   ├── HomePage.jsx         # Active notes view
+│   │   ├── LoginPage.jsx        # User login page
+│   │   ├── NotFoundPage.jsx     # 404 page for route and note fallbacks
+│   │   ├── NoteDetailPage.jsx   # Single note detail with action controls
+│   │   └── RegisterPage.jsx     # User registration page
+│   ├── styles/
+│   │   └── style.css            # Global stylesheet & design tokens
+│   ├── utils/
+│   │   ├── index.js             # Date formatting, HTML stripping & filtering helpers
+│   │   └── network-data.js      # REST API client layer (all 13 functions)
+│   ├── App.jsx                  # Main route declaration
+│   └── index.jsx                # Application root with Provider hierarchy
+├── index.html                   # HTML entry point with Notufy branding
+├── package.json
+└── vite.config.js
+```
+
+---
+
+## 🚀 Getting Started
 
 ### Prerequisites
 
-Ensure you have [Node.js](https://nodejs.org/) (version 16 or newer recommended) installed on your machine.
+- [Node.js](https://nodejs.org/) (version 16.x or newer recommended)
+- [npm](https://www.npmjs.com/)
 
 ### Installation
 
-1. Clone or download the repository.
-2. Navigate to the project directory:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/rommygna1/catatan.---personal-notes-app.git
+   cd personal-notes-app
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-```bash
-cd personal-notes-app
-```
+### Development
 
-3. Install dependencies:
-
-```bash
-npm install
-```
-
-### Development Server
-
-Start the local Vite development server:
-
+Run the local development server:
 ```bash
 npm run dev
 ```
-
-Open your browser and visit the local URL displayed in the terminal (typically `http://localhost:5173`).
+Open your browser and navigate to `http://localhost:5173`.
 
 ### Production Build
 
-To create a production-ready bundle and preview it locally:
-
+To build the application for production:
 ```bash
-# Build the project
 npm run build
-
-# Preview the production build
+```
+To preview the production bundle locally:
+```bash
 npm run preview
 ```
 
 ---
 
-## Project Structure
+## 🌐 API Specification
 
-```text
-personal-notes-app/
-├── public/                 # Static assets
-├── src/
-│   ├── components/         # Reusable UI components
-│   │   ├── Header.jsx      # Navigation header with brand link and archive navigation
-│   │   ├── NoteInput.jsx   # Controlled form component to create notes
-│   │   ├── NoteItem.jsx    # Card item representing an individual note
-│   │   ├── NoteList.jsx    # Grid container for rendering lists of notes
-│   │   └── SearchBar.jsx   # Controlled input for title search
-│   ├── pages/              # Route page components
-│   │   ├── AddNotePage.jsx    # Page with note creation form
-│   │   ├── ArchivePage.jsx    # Page displaying archived notes
-│   │   ├── HomePage.jsx       # Page displaying active notes
-│   │   ├── NoteDetailPage.jsx # Page displaying single note details and actions
-│   │   └── NotFoundPage.jsx   # 404 error page for unmatched routes
-│   ├── styles/
-│   │   └── style.css       # Global design tokens and layout styling
-│   ├── utils/
-│   │   ├── index.js        # Helper functions (date formatting, keyword filtering)
-│   │   └── local-data.js   # Local storage abstraction and initial data set
-│   ├── App.jsx             # Main application component and route definitions
-│   └── index.jsx           # React DOM render entry point
-├── index.html              # HTML template
-├── package.json            # Project dependencies and npm scripts
-└── vite.config.js          # Vite configuration
-```
+Notufy connects directly to the Dicoding Notes API v1:
+- **Base URL**: `https://notes-api.dicoding.dev/v1`
+- **Endpoints**:
+  - `POST /register`: Register a new user (`name`, `email`, `password`)
+  - `POST /login`: Authenticate user (`email`, `password`) -> returns JWT `accessToken`
+  - `GET /users/me`: Fetch authenticated user profile (`id`, `name`, `email`)
+  - `GET /notes`: Retrieve active notes for authenticated user
+  - `GET /notes/archived`: Retrieve archived notes
+  - `GET /notes/{id}`: Retrieve single note detail
+  - `POST /notes`: Create a new note (`title`, `body`)
+  - `POST /notes/{id}/archive`: Archive a note
+  - `POST /notes/{id}/unarchive`: Unarchive a note
+  - `DELETE /notes/{id}`: Delete a note
+
+All API functions are encapsulated within [`src/utils/network-data.js`](src/utils/network-data.js) and called through React Hooks.
 
 ---
 
-## Routing
+## 📄 License
 
-The application uses client-side routing managed by React Router (`react-router-dom`):
-
-| Path | Page Component | Description |
-|---|---|---|
-| `/` | `HomePage` | Displays all active notes with search filter |
-| `/archives` | `ArchivePage` | Displays all archived notes with search filter |
-| `/notes/new` | `AddNotePage` | Form interface to compose and save a new note |
-| `/notes/:id` | `NoteDetailPage` | Displays full note details, archive/unarchive, and delete actions |
-| `*` | `NotFoundPage` | 404 fallback page for any unmatched URLs |
-
----
-
-## Data Management
-
-- Data operations are centralized in `src/utils/local-data.js`.
-- Any creation, deletion, archiving, or unarchiving action updates data in `localStorage`.
-- Notes remain preserved even after reloading the page or closing the browser window.
-- When an active note is archived, the user is automatically redirected to the Archive page (`/archives`) to view the updated list. Conversely, clicking "Batal Arsipkan" (Unarchive) redirects back to the Home page (`/`).
-
----
-
-## Limitations
-
-- **No Backend**: The app does not connect to an API server; all logic runs in the browser.
-- **No Remote Database**: There is no external database; data is tied solely to the client environment.
-- **Local-Only Storage**: All records live in browser `localStorage`.
-- **Data Isolation**: Notes are not shared across different devices or browsers, and clearing browser cache/local storage will reset or wipe the saved notes.
-
----
-
-## Future Improvements
-
-Planned features for future iterations:
-
-- [ ] Backend API integration (Node.js/Express or similar)
-- [ ] Database persistence (PostgreSQL or MongoDB)
-- [ ] User authentication and private accounts
-- [ ] Cross-device note synchronization
-- [ ] Note editing capabilities for existing notes
-- [ ] Dark mode and customizable theme options
-- [ ] Rich text editor toolbar or Markdown formatting support
-
----
-
-## Author
-
-- **Rommy** — [@rommygna1](https://github.com/rommygna1)
+This project is licensed under the MIT License.
