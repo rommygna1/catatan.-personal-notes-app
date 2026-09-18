@@ -1,0 +1,100 @@
+{
+  "brand": "NOTUFY",
+  "brandTagline": "Pikiranmu, terorganisir.",
+  "nav": {
+    "home": "Beranda",
+    "archives": "Arsip",
+    "addNote": "Tambah",
+    "login": "Masuk",
+    "register": "Daftar",
+    "logout": "Keluar"
+  },
+  "hero": {
+    "activeBadge": "Catatan aktif",
+    "activeTitle": "Tempat aman",
+    "activeTitleSerif": "untuk catatanmu.",
+    "activeBody": "Semua catatan terhubung aman dengan akunmu. Cepat, fokus, dan rapi di mana pun kamu berada.",
+    "archiveBadge": "Arsip",
+    "archiveTitle": "Disimpan rapi,",
+    "archiveTitleSerif": "tidak pernah hilang.",
+    "archiveBody": "Catatan yang selesai atau sekadar ingin kamu istirahatkan tetap tersimpan dan bisa dibuka kembali kapan saja."
+  },
+  "search": {
+    "label": "Cari catatan",
+    "activePlaceholder": "Cari berdasarkan judul...",
+    "archivePlaceholder": "Cari di arsip berdasarkan judul..."
+  },
+  "notes": {
+    "emptyActive": "Belum ada catatan. Mulai tulis pikiranmu!",
+    "emptyArchive": "Arsip kosong.",
+    "noMatch": "Tidak ada catatan dengan judul \"{{keyword}}\"",
+    "write": "Tulis",
+    "createdAt": "Dibuat pada",
+    "untitled": "(Tanpa Judul)",
+    "archiveAction": "Arsipkan",
+    "unarchiveAction": "Batal Arsipkan",
+    "deleteAction": "Hapus",
+    "saveAction": "Simpan Catatan",
+    "saving": "Menyimpan...",
+    "deleting": "Menghapus...",
+    "archiving": "Mengarsipkan...",
+    "unarchiving": "Membatalkan arsip..."
+  },
+  "input": {
+    "pageBadge": "Catatan baru",
+    "pageTitle": "Tulis Catatan",
+    "titleLabel": "Judul",
+    "titlePlaceholder": "Judul catatan...",
+    "bodyLabel": "Isi Catatan",
+    "bodyPlaceholder": "Tulis isi catatan di sini...",
+    "titleRequired": "Judul catatan tidak boleh kosong."
+  },
+  "auth": {
+    "loginTitle": "Selamat datang kembali",
+    "loginSubtitle": "Masuk untuk mengakses catatan pribadimu",
+    "registerTitle": "Buat akun baru",
+    "registerSubtitle": "Mulai menulis dan mengelola catatanmu bersama Notufy",
+    "nameLabel": "Nama Lengkap",
+    "namePlaceholder": "John Doe",
+    "emailLabel": "Alamat Email",
+    "emailPlaceholder": "nama@example.com",
+    "passwordLabel": "Kata Sandi",
+    "passwordPlaceholder": "Minimal 6 karakter",
+    "confirmPasswordLabel": "Konfirmasi Kata Sandi",
+    "confirmPasswordPlaceholder": "Ulangi kata sandi",
+    "loginSubmit": "Masuk",
+    "registerSubmit": "Daftar Akun",
+    "loggingIn": "Sedang masuk...",
+    "registering": "Sedang mendaftar...",
+    "noAccount": "Belum memiliki akun?",
+    "hasAccount": "Sudah memiliki akun?",
+    "goToRegister": "Daftar di sini",
+    "goToLogin": "Masuk di sini",
+    "nameRequired": "Nama wajib diisi.",
+    "emailRequired": "Email wajib diisi.",
+    "emailInvalid": "Format email tidak valid.",
+    "passwordRequired": "Kata sandi wajib diisi.",
+    "passwordMinLength": "Kata sandi minimal 6 karakter.",
+    "confirmPasswordRequired": "Konfirmasi kata sandi wajib diisi.",
+    "confirmPasswordMismatch": "Konfirmasi kata sandi tidak cocok."
+  },
+  "detail": {
+    "notFound": "Catatan yang kamu cari tidak ditemukan atau sudah dihapus."
+  },
+  "notFound": {
+    "title": "Halaman Tidak Ditemukan",
+    "message": "Halaman yang kamu cari tidak tersedia atau sudah dipindahkan.",
+    "backHome": "Kembali ke Beranda"
+  },
+  "theme": {
+    "toggle": "Ganti tema",
+    "light": "Terang",
+    "dark": "Gelap"
+  },
+  "locale": {
+    "toggle": "Ganti bahasa",
+    "en": "EN",
+    "id": "ID"
+  },
+  "loading": "Memuat..."
+}

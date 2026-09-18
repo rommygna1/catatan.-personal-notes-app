@@ -1,0 +1,100 @@
+{
+  "brand": "NOTUFY",
+  "brandTagline": "Your thoughts, organized.",
+  "nav": {
+    "home": "Home",
+    "archives": "Archives",
+    "addNote": "New Note",
+    "login": "Log In",
+    "register": "Register",
+    "logout": "Log Out"
+  },
+  "hero": {
+    "activeBadge": "Active notes",
+    "activeTitle": "A safe sanctuary",
+    "activeTitleSerif": "for your thoughts.",
+    "activeBody": "Every note is securely connected to your account. Fast, focused, and organized anywhere you go.",
+    "archiveBadge": "Archives",
+    "archiveTitle": "Stored safely,",
+    "archiveTitleSerif": "never truly gone.",
+    "archiveBody": "Finished notes or ideas you want to rest remain safe and can be restored anytime."
+  },
+  "search": {
+    "label": "Search notes",
+    "activePlaceholder": "Search notes by title...",
+    "archivePlaceholder": "Search archived notes by title..."
+  },
+  "notes": {
+    "emptyActive": "No notes yet. Start writing your thoughts!",
+    "emptyArchive": "Archive is empty.",
+    "noMatch": "No notes found for \"{{keyword}}\"",
+    "write": "Write",
+    "createdAt": "Created at",
+    "untitled": "(Untitled)",
+    "archiveAction": "Archive",
+    "unarchiveAction": "Unarchive",
+    "deleteAction": "Delete",
+    "saveAction": "Save Note",
+    "saving": "Saving...",
+    "deleting": "Deleting...",
+    "archiving": "Archiving...",
+    "unarchiving": "Unarchiving..."
+  },
+  "input": {
+    "pageBadge": "New note",
+    "pageTitle": "Create Note",
+    "titleLabel": "Title",
+    "titlePlaceholder": "Note title...",
+    "bodyLabel": "Note Content",
+    "bodyPlaceholder": "Write your thoughts here...",
+    "titleRequired": "Note title cannot be empty."
+  },
+  "auth": {
+    "loginTitle": "Welcome back",
+    "loginSubtitle": "Log in to access your personal notes",
+    "registerTitle": "Create an account",
+    "registerSubtitle": "Start writing and organizing your thoughts with Notufy",
+    "nameLabel": "Full Name",
+    "namePlaceholder": "John Doe",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "name@example.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Minimum 6 characters",
+    "confirmPasswordLabel": "Confirm Password",
+    "confirmPasswordPlaceholder": "Repeat your password",
+    "loginSubmit": "Log In",
+    "registerSubmit": "Create Account",
+    "loggingIn": "Logging in...",
+    "registering": "Creating account...",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "goToRegister": "Register here",
+    "goToLogin": "Log in here",
+    "nameRequired": "Name is required.",
+    "emailRequired": "Email is required.",
+    "emailInvalid": "Please enter a valid email address.",
+    "passwordRequired": "Password is required.",
+    "passwordMinLength": "Password must be at least 6 characters.",
+    "confirmPasswordRequired": "Please confirm your password.",
+    "confirmPasswordMismatch": "Passwords do not match."
+  },
+  "detail": {
+    "notFound": "The note you are looking for was not found or has been deleted."
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "message": "The page you are looking for does not exist or has been moved.",
+    "backHome": "Back to Home"
+  },
+  "theme": {
+    "toggle": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "locale": {
+    "toggle": "Switch language",
+    "en": "EN",
+    "id": "ID"
+  },
+  "loading": "Loading..."
+}
