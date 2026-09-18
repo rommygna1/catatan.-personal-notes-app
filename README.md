@@ -117,7 +117,7 @@ personal-notes-app/
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/rommygna1/catatan.---personal-notes-app.git
+   git clone https://github.com/rommygna1/notufy.git
    cd personal-notes-app
    ```
 2. Install dependencies:
