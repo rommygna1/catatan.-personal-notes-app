@@ -1,14 +1,26 @@
-import React, { useMemo, useState } from 'react';
+import React, {
+  useContext, useEffect, useMemo,
+} from 'react';
 import { useSearchParams } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 import NoteList from '../components/NoteList';
+import LoadingIndicator from '../components/LoadingIndicator';
+import useNotes from '../hooks/useNotes';
 import { filterNotesByKeyword } from '../utils';
-import { getArchivedNotes } from '../utils/local-data';
+import { LocaleContext } from '../contexts/LocaleContext';
 
 function ArchivePage() {
-  const [notes] = useState(() => getArchivedNotes());
+  const {
+    notes, isLoading, error, loadArchivedNotes,
+  } = useNotes();
   const [searchParams, setSearchParams] = useSearchParams();
+  const { t } = useContext(LocaleContext);
+
   const keyword = searchParams.get('keyword') || '';
+
+  useEffect(() => {
+    loadArchivedNotes();
+  }, [loadArchivedNotes]);
 
   const filteredNotes = useMemo(
     () => filterNotesByKeyword(notes, keyword),
@@ -24,33 +36,42 @@ function ArchivePage() {
   };
 
   const emptyMessage = keyword
-    ? `Tidak ada arsip dengan judul "${keyword}"`
-    : 'Arsip kosong';
+    ? t('notes.noMatch', { keyword })
+    : t('notes.emptyArchive');
 
   return (
     <>
       <section className="page-hero">
         <p className="eyebrow">
           <span className="eyebrow__dot" aria-hidden="true" />
-          Arsip
+          {t('hero.archiveBadge')}
         </p>
         <h1 className="hero-heading">
-          Disimpan rapi,
-          <span className="hero-heading__serif">tidak pernah hilang.</span>
+          {t('hero.archiveTitle')}
+          <span className="hero-heading__serif">{t('hero.archiveTitleSerif')}</span>
         </h1>
-        <p className="hero-body">
-          Catatan yang selesai atau sekadar ingin kamu istirahatkan tetap
-          tersimpan dan bisa dibuka kembali kapan saja.
-        </p>
+        <p className="hero-body">{t('hero.archiveBody')}</p>
       </section>
 
       <section className="page-content">
         <SearchBar
           keyword={keyword}
           onKeywordChange={handleKeywordChange}
-          placeholder="Cari di arsip berdasarkan judul..."
+          placeholder={t('search.archivePlaceholder')}
         />
-        <NoteList notes={filteredNotes} emptyMessage={emptyMessage} />
+
+        {error && (
+          <div className="alert alert--error" role="alert">
+            <span className="alert__icon" aria-hidden="true">✕</span>
+            <span>{error}</span>
+          </div>
+        )}
+
+        {isLoading ? (
+          <LoadingIndicator message={t('loading')} />
+        ) : (
+          <NoteList notes={filteredNotes} emptyMessage={emptyMessage} />
+        )}
       </section>
     </>
   );

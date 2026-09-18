@@ -1,11 +1,12 @@
-const showFormattedDate = (date) => {
+const showFormattedDate = (date, locale = 'en') => {
   const options = {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   };
-  return new Date(date).toLocaleDateString('id-ID', options);
+  const resolvedLocale = locale === 'id' ? 'id-ID' : 'en-US';
+  return new Date(date).toLocaleDateString(resolvedLocale, options);
 };
 
 const stripHtml = (html = '') => html
@@ -13,7 +14,7 @@ const stripHtml = (html = '') => html
   .replace(/\s+/g, ' ')
   .trim();
 
-const filterNotesByKeyword = (notes, keyword = '') => {
+const filterNotesByKeyword = (notes = [], keyword = '') => {
   const normalizedKeyword = keyword.trim().toLowerCase();
 
   if (!normalizedKeyword) {

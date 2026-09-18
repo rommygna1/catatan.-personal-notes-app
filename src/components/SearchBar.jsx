@@ -1,20 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { LocaleContext } from '../contexts/LocaleContext';
 
-function SearchBar({ keyword = '', onKeywordChange, placeholder = 'Cari berdasarkan judul...' }) {
+function SearchBar({ keyword = '', onKeywordChange, placeholder }) {
+  const { t } = useContext(LocaleContext);
+  const defaultPlaceholder = placeholder || t('search.activePlaceholder');
+
   const handleChange = (event) => {
     onKeywordChange(event.target.value);
   };
 
   return (
     <div className="search-bar">
-      <label className="search-bar__label" htmlFor="note-search">Cari catatan</label>
+      <label className="search-bar__label" htmlFor="note-search">
+        {t('search.label')}
+      </label>
       <input
         id="note-search"
         type="text"
         className="search-bar__input"
         value={keyword}
-        placeholder={placeholder}
+        placeholder={defaultPlaceholder}
         onChange={handleChange}
         autoComplete="off"
       />

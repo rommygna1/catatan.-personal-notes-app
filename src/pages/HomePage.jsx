@@ -1,14 +1,26 @@
-import React, { useMemo, useState } from 'react';
+import React, {
+  useContext, useEffect, useMemo,
+} from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 import NoteList from '../components/NoteList';
+import LoadingIndicator from '../components/LoadingIndicator';
+import useNotes from '../hooks/useNotes';
 import { filterNotesByKeyword } from '../utils';
-import { getActiveNotes } from '../utils/local-data';
+import { LocaleContext } from '../contexts/LocaleContext';
 
 function HomePage() {
-  const [notes] = useState(() => getActiveNotes());
+  const {
+    notes, isLoading, error, loadActiveNotes,
+  } = useNotes();
   const [searchParams, setSearchParams] = useSearchParams();
+  const { t } = useContext(LocaleContext);
+
   const keyword = searchParams.get('keyword') || '';
+
+  useEffect(() => {
+    loadActiveNotes();
+  }, [loadActiveNotes]);
 
   const filteredNotes = useMemo(
     () => filterNotesByKeyword(notes, keyword),
@@ -24,34 +36,51 @@ function HomePage() {
   };
 
   const emptyMessage = keyword
-    ? `Tidak ada catatan dengan judul "${keyword}"`
-    : 'Tidak ada catatan';
+    ? t('notes.noMatch', { keyword })
+    : t('notes.emptyActive');
 
   return (
     <>
       <section className="page-hero">
         <p className="eyebrow">
           <span className="eyebrow__dot" aria-hidden="true" />
-          Catatan aktif
+          {t('hero.activeBadge')}
         </p>
         <h1 className="hero-heading">
-          Tempat aman
-          <span className="hero-heading__serif">untuk catatanmu.</span>
+          {t('hero.activeTitle')}
+          <span className="hero-heading__serif">{t('hero.activeTitleSerif')}</span>
         </h1>
-        <p className="hero-body">
-          Semua catatan tersimpan di perangkat ini. Tanpa akun, tanpa server,
-          sepenuhnya milikmu.
-        </p>
+        <p className="hero-body">{t('hero.activeBody')}</p>
       </section>
 
       <section className="page-content">
-        <SearchBar keyword={keyword} onKeywordChange={handleKeywordChange} />
-        <NoteList notes={filteredNotes} emptyMessage={emptyMessage} />
+        <SearchBar
+          keyword={keyword}
+          onKeywordChange={handleKeywordChange}
+          placeholder={t('search.activePlaceholder')}
+        />
+
+        {error && (
+          <div className="alert alert--error" role="alert">
+            <span className="alert__icon" aria-hidden="true">✕</span>
+            <span>{error}</span>
+          </div>
+        )}
+
+        {isLoading ? (
+          <LoadingIndicator message={t('loading')} />
+        ) : (
+          <NoteList notes={filteredNotes} emptyMessage={emptyMessage} />
+        )}
       </section>
 
-      <Link className="floating-action" to="/notes/new" aria-label="Tambah catatan baru">
+      <Link
+        className="floating-action"
+        to="/notes/new"
+        aria-label={t('notes.write')}
+      >
         <span className="floating-action__icon" aria-hidden="true">+</span>
-        Tulis
+        {t('notes.write')}
       </Link>
     </>
   );
